@@ -1,14 +1,16 @@
 # Base image
-FROM python:alpine
+FROM        python:alpine
+
+LABEL       author="Prasad Honrao"
 
 # Add app code to /code inside container image
-ADD . /code
+ADD         . /code
 
 # Set working directory for subsequent commands
-WORKDIR /code
+WORKDIR     /code
 
 # Install dependencies
-RUN pip install -r requirements.txt
+RUN         pip install -r requirements.txt
 
 # Command to run when container starts
-ENTRYPOINT ["python", "app.py"]
+ENTRYPOINT  ["python", "app.py"]

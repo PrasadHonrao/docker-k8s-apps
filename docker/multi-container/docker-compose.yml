@@ -1,7 +1,8 @@
 version: "3.8"
 services:
   web-fe:
-    build: .
+    build:
+      context: .
     command: python app.py
     ports:
       - target: 5000
@@ -19,6 +20,7 @@ services:
 
 networks:
   counter-net:
+    driver: bridge
 
 volumes:
   counter-vol:
