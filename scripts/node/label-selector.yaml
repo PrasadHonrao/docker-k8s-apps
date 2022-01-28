@@ -1,0 +1,21 @@
+# Labelling a node
+# kubectl label node node1 size=large
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx-pod
+  labels:
+    name: my-nginx-pod
+spec:
+  containers:
+  - name: my-nginx-container
+    image: nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 8080
+  nodeSelector:
+    size: large

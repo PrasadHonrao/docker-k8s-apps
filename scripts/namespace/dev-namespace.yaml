@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-namespace
+
+# ❗️Create a namespace using imperative format
+# kubectl create namespace dev-namespace
+# kubectl delete namespace dev-namespace
+
+# ❗️Create a namespace using declarative format
+# kubectl apply -f dev-namespace.yml
+
+# ❗️Set default namespace
+# kubectl config set-context --current --namespace=dev-namespace
+
+# ❗️Get pods across all namespaces
+# kubectl get pods --all-namespaces

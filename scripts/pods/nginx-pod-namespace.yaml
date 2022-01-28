@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx-pod-dev-ns
+  namespace: dev-namespace
+  labels:
+    release: v1
+spec:
+  containers:
+    - name: my-nginx-container
+      image: nginx
+      resources:
+        limits:
+          cpu: "100m"
+          memory: "128Mi"
+      ports:
+        - name: http-port
+          containerPort: 80
+
+# ❗️Create a namespace first using either imperative or declarative format
+# kubectl create namespace dev-namespace
+# OR
+# kubectl apply -f dev.namespace.yml
+
+# ❗️Create Pod
+# kubectl apply -f nginx.pod.namespace.yml
+# kubectl describe pod my-nginx-pod-dev-ns
+# kubectl delete -f nginx.pod.yml

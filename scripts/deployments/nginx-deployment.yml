@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-deployment
+  labels:
+    version: v3
+spec:
+  selector:
+    matchLabels:
+      app: nginx-app # match by label in template metadata
+  replicas: 5 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      - name: my-nginx-container
+        image: nginx:1.7.9
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
+
+
+# ❗️Create deployment using imperative format
+# kubectl create deployment nginx-deployment --image=nginx:1.15.8 --replicas=2 
+# kubectl create deployment nginx-deployment --image=nginx:1.15.8 --replicas=2 --dry-run -o yaml > deployments/nginx-deployment.yml
+# kubectl get deployment --show-labels
+# kubectl describe deployment my-nginx-deployment
+# kubectl get pods -l app=nginx-app --show-labels
+# kubectl delete deployment my-nginx-deployment
+
+# ❗️Create deployment using declarative format
+# kubectl apply -f nginx-deployment.yml
+# kubectl delete -f deployments/nginx-deployment.yml
+
+# ❗️Get update rollout status
+# kubectl rollout status deployment my-nginx-deployment
+
+# ❗️Get rollout history
+# kubectl rollout history deployment my-nginx-deployment
+
+# ❗️Rollback deployment
+# kubectl rollout undo deployment my-nginx-deployment
+
+# ❗️Scale deployment
+# kubectl scale deployment my-nginx-deployment --replicas=10
+# kubectl scale -f nginx-deployment.yml --replicas=10
+
+# ❗️Auto scale deployment
+# kubectl autoscale deployment my-nginx-deployment --min=2 --max=10 --cpu-percent=50
+# kubectl autoscale -f nginx-deployment.yml --min=2 --max=10 --cpu-percent=50

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-pod
+spec:
+  containers:
+    - name: command-container
+      image: prasadhonrao/ubuntu-sleeper
+      command: ["/bin/sleep"] # this will replace entrypoint value in the image
+      args: ["20"] # this will replace cmd value in the image

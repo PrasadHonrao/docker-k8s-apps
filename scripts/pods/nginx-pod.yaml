@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx-pod
+  labels:
+    release: v1
+    app: nginx-app
+spec:
+  containers:
+    - name: my-nginx-container
+      image: nginx
+      resources: # requests and limits for resources. This is optional.
+        limits:
+          cpu: "100m"
+          memory: "128Mi"
+      ports:
+        - name: http-port
+          containerPort: 80
+
+# ❗️Create Pod using imperative format
+# kubectl run my-nginx-pod --image=nginx
+# kubectl get pods
+# kubectl get pods -o wide
+# kubectl describe pod my-nginx-pod -o yaml
+# kubectl delete pod my-nginx-pod
+
+# ❗️Create Pod using declarative format
+# kubectl create -f nginx-pod.yml --save-config
+# kubectl describe pod my-nginx-pod
+# kubectl apply -f nginx-pod.yml
+# kubectl exec my-nginx-pod -it sh
+# kubectl edit -f nginx-pod.yml
+# kubectl delete -f nginx-pod.yml
+
+# ❗️Access Pod using port forward
+# kubectl port-forward my-nginx-pod 8080:80
+
+# ❗️Access Pod using service
+# kubectl expose pod my-nginx-pod --port=80 --target-port=8080
+
+# ❗️ Create a pod based on the JSON passed into stdin.
+# cat my-nginx-pod.yaml -o json | kubectl create -f -

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  color: "blue"
+  author: "prasad honrao"
+  country.state: "India.MH"
+
+# ❗️Create configmap using imperative format
+# kubectl create configmap app-settings-cm --from-literal=color=blue --from-literal=author="prasad honrao" --from-literal=country.state="India.MH"
+# kubectl create configmap app-settings-cm-2 --from-file=config.properties

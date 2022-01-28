@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-nginx-replicaset
+  labels:
+    version: v1
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      tier: nginx-app
+  template:
+    metadata:
+      labels:
+        tier: nginx-app
+    spec:
+      containers:
+      - name: my-nginx-container
+        image: nginx:alpine
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
+
+
+# ❗️Create replicaset using declarative format
+# kubectl create -f nginx-replicaset.yml --save-config
+# kubectl apply -f nginx-replicaset.yml
+# kubectl replace -f nginx-replicaset.yml # ( replace the replicaset with the new one )
+# kubectl delete -f nginx-replicaset.yml
+
+# ❗️Create replicaset using imperative format
+# kubectl get replicaset my-nginx-replicaset
+# kubectl describe replicaset my-nginx-replicaset
+# kubectl delete replicaset my-nginx-replicaset
+# kubectl scale replicaset my-nginx-replicaset --replicas=3 

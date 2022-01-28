@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-redis-pod
+  labels:
+    release: v1
+spec:
+  containers:
+    - name: my-redis-container
+      image: redis
+      ports:
+        - containerPort: 6379

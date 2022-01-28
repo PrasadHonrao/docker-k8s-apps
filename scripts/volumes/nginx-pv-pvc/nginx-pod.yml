@@ -1,0 +1,24 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: nginx-pv-pvc-pod
+spec: 
+  containers: 
+  - name: nginx-pv-container
+    image: nginx:alpine 
+    command:
+      - /bin/sh
+      - -c
+      - while true; do echo $(date) >> /mnt/logs/output; sleep 1; done
+    volumeMounts: 
+      - name: logs-pvc
+        mountPath: /mnt/logs
+        readOnly: true 
+    resources:
+  volumes: 
+  - name: logs-pvc
+    persistentVolumeClaim:
+      claimName: nginx-pvc
+
+# kubectl apply -f nginx-pod.yml
+# kubectl port-forward nginx-pv-pvc-pod 8080:80

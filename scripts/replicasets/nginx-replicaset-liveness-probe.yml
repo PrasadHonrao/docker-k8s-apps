@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-nginx-replicaset
+  labels:
+    version: v2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: nginx-app
+  template:
+    metadata:
+      labels:
+        tier: nginx-app
+    spec:
+      containers:
+      - name: my-nginx-container
+        image: nginx:alpine
+        resources:
+          limits:
+            memory: "128Mi" #128 MB
+            cpu: "200m" #200 millicpu (.2 cpu or 20% of the cpu)
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          initialDelaySeconds: 15
+          timeoutSeconds: 2 # Default is 1
+          periodSeconds: 5 # Default is 10
+          failureThreshold: 1 # Default is 3

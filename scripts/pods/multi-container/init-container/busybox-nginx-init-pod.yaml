@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-pod
+  labels:
+    app: multi-container-pod
+spec:
+  initContainers:
+  - name: busybox-init-container
+    image: busybox
+    command: ['sh', '-c', 'until nslookup init-service; do echo waiting for init-service service; sleep 1; done; echo Service found!']
+  containers:
+   - name: nginx-container
+     image: nginx:1.15.8
