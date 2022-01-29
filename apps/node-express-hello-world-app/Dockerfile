@@ -1,5 +1,4 @@
 # Test web app that returns the name of the host/pod/container servicing req
-# Linux x64
 FROM node:current-alpine
 
 LABEL org.opencontainers.image.title="Hello Docker Learners!" \
